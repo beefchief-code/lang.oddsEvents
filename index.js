@@ -26,11 +26,58 @@ function numberSorter(){
 //end state
 
 //RENDER
+
+//render any number
+function renderNumber(numbers, $span){
+    const $numbers = numbers.map((num) => {
+        const $num = document.createElement("span");
+        $num.textContent = num;
+        return $num;
+    });
+    $span.replaceChildren(...$numbers);
+}
+    
+    function render(){
+        const $bank = document.querySelector("#numberBank output");
+        renderNumber(bank, $bank);
+        const $odds = document.querySelector("#odds output");
+        renderNumber(odds, $odds);
+        const $evens = document.querySelector("#evens output");
+        renderNumber(evens, $evens);
+    }
     //push bank to <#numberBank>
     //push odds to <#odds>
     //push evens to <#evens>
 
 //SCRIPT
-    //sort 1: send first num in bank to odds/evens
-    //sort all: loop sort 1 for length of bank
+    //init render
+    render();
+    //send input to bank on submit
+    const $form = document.querySelector("form");
+        $form.addEventListener("submit", (event) => {
+            //prevent refresh
+            event.preventDefault();
+            //get form to js
+            const $userNum = document.querySelector("#number");
+            //input value to var
+            const userNum = $userNum.Value;
+            $userNum.value = "";
 
+            addToBank(userNum);
+            render();
+        });
+    //sort 1: send first num in bank to odds/evens
+    const $sortOne = document.querySelector("#sortOne");
+        $sortOne.addEventListener("click", () => {
+            numberSorter();
+            render();
+        });
+
+    //sort all: loop sort 1 until bank empty
+        const $sortAll = document.querySelector("#sortAll");
+        $sortAll.addEventListener("click", () =>{
+            while (bank.length > 0){
+                numberSorter();
+            }
+            render();
+        });
