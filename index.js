@@ -28,13 +28,13 @@ function numberSorter(){
 //RENDER
 
 //render any number
-function renderNumber(numbers, $span){
-    const $numbers = numbers.map((num) => {
+function renderNumber(numbers, $element){
+    const $nums = numbers.map((num) => {
         const $num = document.createElement("span");
         $num.textContent = num;
         return $num;
     });
-    $span.replaceChildren(...$numbers);
+    $element.replaceChildren(...$nums);
 }
     
     function render(){
@@ -58,12 +58,13 @@ function renderNumber(numbers, $span){
             //prevent refresh
             event.preventDefault();
             //get form to js
-            const $userNum = document.querySelector("#number");
+            const $input = document.querySelector("#number");
             //input value to var
-            const userNum = $userNum.Value;
-            $userNum.value = "";
+            const input = $input.value;
+            
+            $input.value = "";
 
-            addToBank(userNum);
+            addToBank(input);
             render();
         });
     //sort 1: send first num in bank to odds/evens
